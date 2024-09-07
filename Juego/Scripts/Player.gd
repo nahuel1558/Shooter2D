@@ -1,9 +1,10 @@
 extends KinematicBody2D
 
-
+export (int) var health = 100
 export (int) var speed = 300
 export (PackedScene) var bullet_scene
 var screen_size
+var invulnerable = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -30,8 +31,6 @@ func handle_movement(delta):
 	velocity = velocity.normalized() * speed
 	move_and_slide(velocity)
 	
-	#if Input.is_action_just_pressed("ui_select"): 
-	#	shoot()
 	
 func handle_rotation():
 	var mouse_position = get_global_mouse_position()
@@ -47,5 +46,22 @@ func shoot():
 	var bullet_direction = (get_global_mouse_position() - position).normalized()
 	bullet.set_velocity(bullet_direction * bullet.speed)
 	
+func _on_Player_body_entered(body):
+	if body.is_in_group("enemy_bullets"):
+		take_damage(body.damage)
 
+func take_damage(damage):
+	if not invulnerable:
+		health -= damage
+		if health <= 0:
+			die()
+		else:
+			invulnerable = true
+			$Timer.start(2)
+
+func die():
+	var current_scene = get_tree().current_scene
+	get_tree().reload_current_scene()
 	
+func _on_Timer_timeout():
+	invulnerable = false
