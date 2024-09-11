@@ -1,15 +1,12 @@
-extends Area2D
+extends "res://Scripts/EnemyBasic.gd"
 
-export (int) var speed = 80
-export (int) var health = 5
 export (PackedScene) var bullet_enemy_scene
-var player
 
 func _ready():
 	player = get_tree().root.get_node("Main/Player")
 	add_to_group("enemies")
-	yield(get_tree().create_timer(5.0), "timeout")
 	shoot()
+	yield(get_tree().create_timer(5.0), "timeout")
 
 func _process(delta):
 	if player:
@@ -32,7 +29,7 @@ func _on_EnemyRanged_area_entered(area):
 func take_damage_enemy(damage_bullet):
 	health -= damage_bullet
 	is_alive()
-		
+
 func is_alive():
 	if health <= 0:
 		queue_free()

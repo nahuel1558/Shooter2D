@@ -2,7 +2,7 @@ extends Node2D
 
 export (PackedScene) var enemy_spawner_scene
 var enemy_spawner
-export (float) var spawn_interval = 2.0
+export (float) var spawn_interval = 2.5
 var time_passed = 0
 var score = 0
 
@@ -17,5 +17,5 @@ func _process(delta):
 
 func spawn_enemy():
 	enemy_spawner = enemy_spawner_scene.instance()
-	$enemies.add_child(enemy_spawner)
+	$Enemies.add_child(enemy_spawner)
 

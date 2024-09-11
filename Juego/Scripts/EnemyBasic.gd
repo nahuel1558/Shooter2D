@@ -1,6 +1,6 @@
 extends Area2D
 
-export (int) var speed = 100
+var speed = 100
 export (int) var health = 10 
 var player
 
@@ -22,3 +22,6 @@ func take_damage_enemy(damage_bullet):
 	health -= damage_bullet
 	if health <= 0:
 		queue_free()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()
