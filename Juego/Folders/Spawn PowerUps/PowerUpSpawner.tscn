@@ -1,0 +1,15 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Folders/Spawn PowerUps/PowerUpSpawner.gd" type="Script" id=1]
+[ext_resource path="res://Folders/PowerUps/Scenes PowerUps/PowerUpSpeed.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Folders/PowerUps/Scenes PowerUps/PowerUpHealth.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Folders/PowerUps/Scenes PowerUps/PowerUpBulletSpeed.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Folders/PowerUps/Scenes PowerUps/PowerUpBulletDamage.tscn" type="PackedScene" id=5]
+
+[node name="PowerUpSpawner" type="Node2D"]
+script = ExtResource( 1 )
+power_up_scenes = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Patron Triangulo.png-5e7bcc8b779083daca128067a614230f.stex"
+path="res://.import/13.png-3a2e254d68bb96174d8148b00e4b9861.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Wallpaper/Patron Triangulo.png"
-dest_files=[ "res://.import/Patron Triangulo.png-5e7bcc8b779083daca128067a614230f.stex" ]
+source_file="res://Assets/Map/BackGround/13.png"
+dest_files=[ "res://.import/13.png-3a2e254d68bb96174d8148b00e4b9861.stex" ]
 
 [params]
 
@@ -19,8 +19,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=false
+flags/repeat=0
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
