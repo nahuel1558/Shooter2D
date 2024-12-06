@@ -10,9 +10,9 @@ func _ready():
 	add_to_group("enemies")
 
 func _process(delta):
-	if player:
-			var direction = (player.position - position).normalized()
-			position += direction * speed * delta
+	if is_instance_valid(player):
+		var direction = (player.position - position).normalized()
+		position += direction * speed * delta
 
 func _on_EnemyBasic_area_entered(area):
 	if area.is_in_group("player"):

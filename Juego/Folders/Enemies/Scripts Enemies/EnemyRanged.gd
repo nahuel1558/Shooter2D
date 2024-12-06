@@ -17,7 +17,7 @@ func shoot():
 	follow_player(bullet)
 
 func follow_player(bullet):
-	if player:
+	if is_instance_valid(player):
 		var bullet_direction = (player.position - position).normalized()
 		bullet.set_velocity(bullet_direction * bullet.speed)
 

@@ -19,15 +19,8 @@ extents = Vector2( 11, 320 )
 extents = Vector2( 11, 320.063 )
 
 [node name="Map" type="Node2D"]
+pause_mode = 1
 script = ExtResource( 1 )
-
-[node name="MapBackGround" type="TextureRect" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 1024, 600 )
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 7
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -40,7 +33,7 @@ scale = Vector2( 1.61003, 1.61003 )
 texture = ExtResource( 5 )
 
 [node name="PlanetBlueRing" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( -147, -123 )
+position = Vector2( -161, -121 )
 scale = Vector2( 0.317708, 0.317708 )
 texture = ExtResource( 6 )
 
@@ -55,7 +48,6 @@ scale = Vector2( 0.633463, 0.633463 )
 texture = ExtResource( 8 )
 
 [node name="MapBackground" type="Sprite" parent="."]
-visible = false
 position = Vector2( 512, 300 )
 scale = Vector2( 0.749634, 0.78125 )
 texture = ExtResource( 3 )
@@ -91,7 +83,10 @@ shape = SubResource( 4 )
 [node name="Timer" type="Timer" parent="."]
 
 [node name="PowerUpSpawner" parent="." instance=ExtResource( 4 )]
+pause_mode = 1
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 2 )]
+pause_mode = 1
 
 [node name="PowerUpSpawner2" parent="." instance=ExtResource( 4 )]
+pause_mode = 1

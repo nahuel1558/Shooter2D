@@ -7,6 +7,8 @@ var repel_force = 500.0
 var repel_radius = 50.0
 var screen_size
 var invulnerable = false
+var speed_bullet_player = 700
+var damage_bullet_player = 1
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -46,6 +48,8 @@ func shoot():
 	var bullet  = bullet_scene.instance()
 	bullet.position = position
 	bullet.rotation = rotation
+	bullet.speed = speed_bullet_player
+	bullet.damage_bullet = damage_bullet_player
 	get_parent().add_child(bullet)
 	var bullet_direction = (get_global_mouse_position() - position).normalized()
 	bullet.set_velocity(bullet_direction * bullet.speed)
@@ -70,8 +74,10 @@ func repel_enemies():
 			enemy.position += repel_direction * repel_strength * get_physics_process_delta_time()
 
 func die():
-	var current_scene = get_tree().current_scene
-	get_tree().reload_current_scene()
+	var main = get_tree().get_root().get_node("Main")
+	main.load_game_over()
+	queue_free()
+
 
 func _on_InvulnerableTimer_timeout():
 	invulnerable = false

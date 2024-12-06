@@ -5,9 +5,11 @@ onready var user_interface = $UserInterface
 onready var player = $Player
 onready var map = $Map
 onready var powerup_spawner = $Map/PowerUpSpawner
+onready var gameover_menu = $GameOverMenu
 var spawn_interval = 2.0
 var time_passed = 0
 var score = 0
+var is_paused = false
 
 func _ready():
 	var map_size = map.get_map_size()
@@ -23,11 +25,22 @@ func _process(delta):
 		time_passed = 0
 		enemy_spawner.handle_enemy_spawning()
 	update_ui()
+	
+func load_game_over():
+	get_tree().paused = true
+	var game_over_scene = load("res://Folders/Menu/Scenes Menu/GameOverMenu.tscn").instance()
+	get_tree().current_scene.add_child(game_over_scene)
+	var score = user_interface.get_final_score()
+	var time = user_interface.get_time_elapsed()
+	game_over_scene.show_menu()
+	game_over_scene.set_data_label(score, time)
+
 
 func update_score():
 	score = user_interface.kills_count
 	user_interface.add_kill()
 
 func update_ui():
-	user_interface.update_hearts(player.health)
+	if is_instance_valid(player):
+		user_interface.update_hearts(player.health)
 	user_interface.update_timer_label()

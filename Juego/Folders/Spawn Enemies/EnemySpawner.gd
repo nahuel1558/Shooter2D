@@ -12,6 +12,7 @@ var game_time = 0
 export var safe_zone_radius = 150
 var map_size
 var player
+var is_paused = false
 
 func _process(delta):
 	time_passed += delta
@@ -27,14 +28,17 @@ func update_time(new_time):
 	game_time = new_time
 
 func handle_enemy_spawning():
-	if game_time < 15:
-		spawn_enemy(enemy_basic_scene)
-	elif game_time < 30:
-		spawn_enemy(enemy_ranged_scene)
-	elif game_time < 45:
-		spawn_enemy(enemy_strong_scene)
+	if is_instance_valid(player):
+		if game_time < 15:
+			spawn_enemy(enemy_basic_scene)
+		elif game_time < 30:
+			spawn_enemy(enemy_ranged_scene)
+		elif game_time < 45:
+			spawn_enemy(enemy_strong_scene)
+		else:
+			spawn_enemy(enemy_ranged_strong_scene)
 	else:
-		spawn_enemy(enemy_ranged_strong_scene)
+		print("Instance is non exist: ", player)
 
 func spawn_enemy(enemy_scene):
 	var enemy = enemy_scene.instance()
@@ -49,8 +53,11 @@ func set_enemy_position(enemy):
 			rand_range(safe_zone_radius, map_size.x - safe_zone_radius),
 			rand_range(safe_zone_radius, map_size.y - safe_zone_radius)
 		)
-		if player and enemy.position.distance_to(player.position) > safe_zone_radius:
-			break  
+		if player and player.is_inside_tree() and enemy.position.distance_to(player.position) > safe_zone_radius:
+			break
 
 func _on_enemy_freed():
-	active_enemies -= 1
+	active_enemies = max(0, active_enemies - 1)
+
+func pause_spawner():
+	is_paused = true

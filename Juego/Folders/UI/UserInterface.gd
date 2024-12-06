@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+onready var score_label = $KillCountLabel
+onready var timer_label = $TimerLabel
 var timer_seconds = 0
 var timer_minutes = 0
 var kills_count = 0
@@ -17,7 +19,7 @@ func _on_GameTimer_timeout():
 	update_timer_label()
 
 func update_timer_label():
-	$TimerLabel.text = String("%02d:%02d" % [timer_minutes, timer_seconds])
+	timer_label.text = String("%02d:%02d" % [timer_minutes, timer_seconds])
 
 func update_hearts(health):
 	for i in range(3):
@@ -25,4 +27,10 @@ func update_hearts(health):
 
 func add_kill():
 	kills_count += 1
-	$KillCountLabel.text = "Kills: " + str(kills_count)
+	score_label.text = "Kills: " + str(kills_count)
+
+func get_final_score() -> int:
+	return kills_count
+
+func get_time_elapsed() -> String:
+	return "%02d:%02d" % [timer_minutes, timer_seconds]

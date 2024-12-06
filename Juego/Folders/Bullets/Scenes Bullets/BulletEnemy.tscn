@@ -7,6 +7,7 @@
 extents = Vector2( 10.5, 39.25 )
 
 [node name="BulletEnemy" type="Area2D" groups=["enemy_bullets"]]
+pause_mode = 1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )

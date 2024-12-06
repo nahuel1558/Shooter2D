@@ -30,7 +30,7 @@ func set_powerup_position(powerup):
 		if player and powerup.position.distance_to(player.position) > 150:
 			break
 
-func _on_powerup_collected(area):
+func _on_powerup_collected(area, powerup_instance):
 	if area.is_in_group("player"):
-		area.apply_effect(player) 
-		area.queue_free()
+		area.apply_effect(player)
+		powerup_instance.queue_free()
